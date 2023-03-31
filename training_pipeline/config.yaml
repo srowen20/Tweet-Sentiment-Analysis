@@ -1,0 +1,44 @@
+#gcp_variables
+project: *
+location: europe-west4
+bucket_name: *
+
+# Raw data variables
+sentiment_max: 2
+    
+#gcs_variables
+gcs_file: gs://*/Corona_NLP_train.csv
+import_schema_uri: aiplatform.schema.dataset.ioformat.text.sentiment
+
+# raw data bq variables
+raw_sentiments: ['Neutral','Positive','Negative','Extremely Positive','Extremely Negative']
+raw_headers: 'UserName,ScreenName,Location,TweetAt,OriginalTweet,Sentiment'
+
+#dataflow_variables:
+is_inference_data: False
+service_location: gs://*/training_tmp/
+dataflow_requirements_file: job-requirements.txt
+preprocess_data_job_name: corona_nlp_preprocessing
+preprocess_data_image_uri: eu.gcr.io/*/corona_nlp_preprocessing
+preprocess_data_machine_type: n1-standard-4
+output_csv: gs://*/training_datasets/nlp_training_preprocessing_output
+
+#bigquery_variables:
+bq_dataset: Corona_NLP
+bq_raw_table: raw_training_data_big_dataset
+bq_vertex_ai_table: vertex_ai_training_inputs_big_dataset
+
+#dataset_variables:
+dataset_display_name: corona_nlp_data_big_dataset
+gcs_labelled_csv_file: training_datasets/labelled_csv_file_for_automl_training_big_dataset.csv
+training_bucket: *
+
+#model_variables:
+model_display_name: corona_nlp
+model_type: sentiment
+bucket_name: *
+
+#pipeline_variables:
+pipeline_name: corona-nlp-training-pipeline
+service_account: *
+enable_caching: False

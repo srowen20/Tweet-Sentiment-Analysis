@@ -1,0 +1,19 @@
+project: *
+location: europe-west4
+bucket_name: *
+pipeline_name: tester
+
+model_display_name : '*'
+
+gcs_source: gs://*/cleaned_data/cleaned_600_elements.csv
+
+bq_dataset: Corona_NLP
+dataset_id: projects/*/locations/europe-west4/datasets/4244609663447859200
+
+model_id: '*'
+model_parent: projects/*/locations/europe-west4/models/*
+
+inference_dataset_source: gs://*/cleaned_data/inference_dataset.csv
+inference_bucket: nlp-batch-prediction-test
+
+test_variable: monday_catchup
